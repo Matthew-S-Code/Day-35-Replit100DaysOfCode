@@ -1,0 +1,54 @@
+import os, time
+
+toDoList = []
+
+def printList():
+  print()
+  for item in toDoList:
+    print(item)
+  print()
+
+title = "YOUR TODO LIST"
+print(f"\033[0;32m {title:^45}","\033[0m")
+print("\n")
+
+time.sleep(1.5)
+os.system("clear")
+
+while True:
+  schedule = input("View, add, change, or delete an item from the to do list\n"
+  "To clear the screen just type 'clear' \n"
+  "To erase the entire list just type 'erase'\n"
+   ": ")
+  if schedule.lower() == "add":
+    item = input("What would you like to add? ")
+    if item not in toDoList:
+        toDoList.append(item)
+    else:
+        print("This item already exists in the list.")
+  elif schedule.lower() == "delete":
+    item = input("What would you like to delete? ")
+    if item in toDoList:
+        confirm = input(f"Are you sure you want to delete '{item}'? (yes/no): ")
+        if confirm.lower() == "yes":
+            toDoList.remove(item)
+    else:
+        print("Item not found in the list.")
+  elif schedule.lower() == "change":
+    item = input("Which item would you like to change? ")
+    if item in toDoList:
+        new_item = input(f"What is the new value for '{item}'? ")
+        index = toDoList.index(item)
+        toDoList[index] = new_item
+    else:
+        print("Item not found. Please check the correct item.")
+  elif schedule.lower() == "view":
+    printList()
+  elif schedule.lower() == "erase":
+    confirm = input("Are you sure you want to erase the entire list? (yes/no): ")
+    if confirm.lower() == "yes":
+        toDoList.clear() 
+        print("To Do list has been erased.")
+  else:
+    time.sleep(1)
+    os.system("clear")
